@@ -10,7 +10,6 @@ const io = require("socket.io")(server);
 
 let MONGO_URL = "mongodb://localhost:27017/";
 
-
 mongoose.connect(MONGO_URL, { useNewUrlParser: true });
 
 const db = mongoose.connection;
