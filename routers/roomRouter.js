@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const Rooms = require("../schemas/roomModel");
 
-router.get('/allRooms', async (req, res) => {
+router.get('/fetchAllRooms', async (req, res) => {
     try{
         const rooms = await Rooms.find().exec();
         res.status(200).json(rooms);
@@ -11,7 +11,7 @@ router.get('/allRooms', async (req, res) => {
     }
 });
 
-router.get('/availableRooms', async (req, res) => {
+router.get('/fetchAvailableRooms', async (req, res) => {
     try{
         const rooms = await Rooms.find({ status: "available" }).exec();
         res.status(200).json(rooms);
@@ -20,7 +20,7 @@ router.get('/availableRooms', async (req, res) => {
     }
 });
 
-router.get('/aRoom/:id', async (req, res) => {
+router.get('/fetchARoom/:id', async (req, res) => {
     try{
         const { id } = req.params;
         const room = await Rooms.findById(id).exec();
@@ -30,7 +30,7 @@ router.get('/aRoom/:id', async (req, res) => {
     }
 });
 
-router.post('/addRoom', async (req, res) => {
+router.post('/addARoom', async (req, res) => {
     try{
         const  data  = req.body;
         const newRoom = new Rooms(data);
@@ -41,7 +41,7 @@ router.post('/addRoom', async (req, res) => {
     }
 });
 
-router.put('/updateRoom/:id', async (req, res) => {
+router.put('/updateARoom/:id', async (req, res) => {
     try{
         const { id } = req.params;
         const data  = req.body;
@@ -52,7 +52,7 @@ router.put('/updateRoom/:id', async (req, res) => {
     }
 });
 
-router.delete('/deleteRoom/:id', async (req, res) => {
+router.delete('/deleteARoom/:id', async (req, res) => {
     try{
         const { id } = req.params;
         const result = await Rooms.deleteOne({ _id: id }).exec();
@@ -76,6 +76,8 @@ router.use((err, req, res) => {
         message: "Error in app"
     });
 });
+
+
 
 module.exports = router;
 
