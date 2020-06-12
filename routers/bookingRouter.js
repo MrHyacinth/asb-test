@@ -12,7 +12,7 @@ router.get('/admin', async (req, res) => {
     }
 });
 
-router.get('/allBookings', async (req, res) => {
+router.get('/fetchAllBookings', async (req, res) => {
     try{
         const bookings = await Bookings.find().exec();
         res.status(200).json(bookings);
@@ -21,7 +21,7 @@ router.get('/allBookings', async (req, res) => {
     }
 });
 
-router.get('/aBooking/:id', async (req, res) => {
+router.get('/fetchABooking/:id', async (req, res) => {
     try{
         const { id } = req.params;
         const booking = await Bookings.findById(id).exec();
@@ -31,7 +31,7 @@ router.get('/aBooking/:id', async (req, res) => {
     }
 });
 
-router.post("/addBooking", async (req, res) => {
+router.post("/addABooking", async (req, res) => {
     try{
         const  data  = req.body;
         const newBooking = new Bookings(data);
@@ -43,21 +43,21 @@ router.post("/addBooking", async (req, res) => {
     }
 });
 
-router.delete('/deleteBooking/:id', async (req, res) => {
+router.put('/updateABooking/:id', async (req, res) => {
     try{
         const { id } = req.params;
-        const result = await Bookings.deleteOne({ _id: id }).exec();
+        const data  = req.body;
+        const result = await Bookings.findByIdAndUpdate(id, { $set: data }).exec();
         res.status(200).json(result);
     }catch(err){
         res.status(500).json({ body: err.message});
     }
 });
 
-router.put('/updateBooking/:id', async (req, res) => {
+router.delete('/deleteABooking/:id', async (req, res) => {
     try{
         const { id } = req.params;
-        const data  = req.body;
-        const result = await Bookings.findByIdAndUpdate(id, { $set: data }).exec();
+        const result = await Bookings.deleteOne({ _id: id }).exec();
         res.status(200).json(result);
     }catch(err){
         res.status(500).json({ body: err.message});
@@ -78,6 +78,5 @@ router.use((err, req, res) => {
         message: "Error in app"
     });
 });
-
 
 module.exports = router;
