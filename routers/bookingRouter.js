@@ -1,7 +1,5 @@
 const express = require('express');
 const router = express.Router();
-const Bookings = require("../schemas/bookingModel");
-const Rooms = require("../schemas/roomModel");
 const BookingControllers = require('../controllers/bookingControllers');
 
 router.get('/admin', BookingControllers.getBookings);
