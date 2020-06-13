@@ -33,7 +33,7 @@ exports.updateBooking = async (req, res, next) => {
     try{
         const { id } = req.params;
         const data  = req.body;
-        const updatedBooking = BookingServices.updateBooking(id, data);
+        const updatedBooking = await BookingServices.updateBooking(id, data);
         return res.status(200).json(updatedBooking);
     }catch(err){
         return res.status(500).json({ body: err.message });
@@ -43,7 +43,7 @@ exports.updateBooking = async (req, res, next) => {
 exports.deleteBooking = async (req, res, next) => {
     try{
         const { id } = req.params;
-        const bookingToDelete = BookingServices.deleteBooking(id);
+        const bookingToDelete = await BookingServices.deleteBooking(id);
         return res.status(200).json(bookingToDelete);
     }catch(err){
         return res.status(500).json({ body: err.message });
