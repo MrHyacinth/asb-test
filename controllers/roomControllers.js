@@ -31,7 +31,7 @@ exports.getARoom = async (req, res, next) => {
 exports.createARoom = async (req, res, next) => {
     try{
         const data  = req.body;
-        const newRoom = RoomServices.createARoom(data);
+        const newRoom = await RoomServices.createARoom(data);
         return res.status(200).json(newRoom);
     }catch(err){
         return res.status(500).json({ body: err.message });
@@ -42,7 +42,7 @@ exports.updateARoom = async (req, res, next) => {
     try{
         const { id } = req.params;
         const data = req.body;
-        const roomToUpdate = RoomServices.updateARoom(id, data);
+        const roomToUpdate = await RoomServices.updateARoom(id, data);
         return res.status(200).json(roomToUpdate);
     }catch(err){
         return res.status(500).json({ body: err.message });
@@ -52,7 +52,7 @@ exports.updateARoom = async (req, res, next) => {
 exports.deleteARoom = async (req, res, next) => {
     try{
         const { id } = req.params;
-        const roomToDelete = RoomServices.deleteARoom(id);
+        const roomToDelete = await RoomServices.deleteARoom(id);
         return res.status(200).json(roomToDelete);
     }catch(err){
         return res.status(500).json({ body: err.message });
