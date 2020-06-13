@@ -1,6 +1,5 @@
 const express = require('express');
 const router = express.Router();
-const Rooms = require("../schemas/roomModel");
 const RoomControllers = require('../controllers/roomControllers');
 
 router.get('/fetchAllRooms', RoomControllers.getRooms);
@@ -12,7 +11,6 @@ router.get('/fetchARoom/:id', RoomControllers.getARoom);
 router.post('/addARoom', RoomControllers.createARoom);
 
 router.put('/updateARoom/:id', RoomControllers.updateARoom);
-
 
 router.delete('/deleteARoom/:id', RoomControllers.deleteARoom);
 
@@ -30,8 +28,6 @@ router.use((err, req, res) => {
         message: "Error in app"
     });
 });
-
-
 
 module.exports = router;
 
