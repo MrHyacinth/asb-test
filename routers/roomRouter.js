@@ -17,7 +17,7 @@ router.delete('/deleteARoom/:id', RoomControllers.deleteARoom);
 router.use((req, res) => {
     res.status(404).json({
         error: true,
-        message: "Error 404 - Route Not Found" 
+        message: 'Error 404 - Route Not Found' 
     });
 });
 
@@ -25,7 +25,7 @@ router.use((err, req, res) => {
     res.status(err.status || 500).json({
         error: true,
         body: err.message,
-        message: "Error in app"
+        message: 'Error in app'
     });
 });
 
