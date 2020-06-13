@@ -40,6 +40,7 @@ exports.createARoom = async data => {
 exports.updateARoom = async (id, data) => {
     try{
         const result = await Rooms.updateOne({ _id: id }, { $set: data });
+        await new Promise((resolve, reject) => setTimeout(resolve, 2000));
         return result;
     }catch(err){
         return err.message;
@@ -49,7 +50,8 @@ exports.updateARoom = async (id, data) => {
 exports.deleteARoom = async id => {
     try{
         const result = await Rooms.deleteOne({ _id: id });
-        res.status(200).json(result);
+        await new Promise((resolve, reject) => setTimeout(resolve, 2000));
+        return result;
     }catch(err){
         return err.message;
     }
