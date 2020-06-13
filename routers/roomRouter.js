@@ -1,66 +1,20 @@
 const express = require('express');
 const router = express.Router();
 const Rooms = require("../schemas/roomModel");
+const RoomControllers = require('../controllers/roomControllers');
 
-router.get('/fetchAllRooms', async (req, res) => {
-    try{
-        const rooms = await Rooms.find().exec();
-        res.status(200).json(rooms);
-    }catch(err){
-        res.status(500).json({ body: err.message });
-    }
-});
+router.get('/fetchAllRooms', RoomControllers.getRooms);
 
-router.get('/fetchAvailableRooms', async (req, res) => {
-    try{
-        const rooms = await Rooms.find({ status: "available" }).exec();
-        res.status(200).json(rooms);
-    }catch(err){
-        res.status(500).json({ body: err.message });
-    }
-});
+router.get('/fetchAvailableRooms', RoomControllers.getAvailableRooms);
 
-router.get('/fetchARoom/:id', async (req, res) => {
-    try{
-        const { id } = req.params;
-        const room = await Rooms.findById(id).exec();
-        res.status(200).json(room);
-    }catch(err){
-        res.status(500).json({ body: err.message });
-    }
-});
+router.get('/fetchARoom/:id', RoomControllers.getARoom);
 
-router.post('/addARoom', async (req, res) => {
-    try{
-        const  data  = req.body;
-        const newRoom = new Rooms(data);
-        const result = await newRoom.save();
-        res.status(201).json(result);
-    }catch(err){
-        res.status(500).json({ body: err.message });
-    }
-});
+router.post('/addARoom', RoomControllers.createARoom);
 
-router.put('/updateARoom/:id', async (req, res) => {
-    try{
-        const { id } = req.params;
-        const data  = req.body;
-        const result = await Rooms.findByIdAndUpdate(id, { $set: data }).exec();
-        res.status(200).json(result);
-    }catch(err){
-        res.status(500).json({ body: err.message});
-    }
-});
+router.put('/updateARoom/:id', RoomControllers.updateARoom);
 
-router.delete('/deleteARoom/:id', async (req, res) => {
-    try{
-        const { id } = req.params;
-        const result = await Rooms.deleteOne({ _id: id }).exec();
-        res.status(200).json(result);
-    }catch(err){
-        res.status(500).json({ body: err.message});
-    }
-});
+
+router.delete('/deleteARoom/:id', RoomControllers.deleteARoom);
 
 router.use((req, res) => {
     res.status(404).json({
