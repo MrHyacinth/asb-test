@@ -30,8 +30,9 @@ exports.createBooking = async data => {
 
 exports.updateBooking = async (id, data) => {
     try{
-        const result = await Bookings.updateOne({ _id: id }, { $set: data });
-        return result;
+        let res = await Bookings.updateOne({ _id: id }, { $set: data });
+        await new Promise((resolve, reject) => setTimeout(resolve, 2000));
+        return res;
     }catch(err){
         return err.message;
     }
@@ -40,7 +41,8 @@ exports.updateBooking = async (id, data) => {
 exports.deleteBooking = async (id, data) => {
     try{
         const result = await Bookings.deleteOne({ _id: id });
-        res.status(200).json(result);
+        await new Promise((resolve, reject) => setTimeout(resolve, 2000));
+        return result;
     }catch(err){
         return err.message;
     }
