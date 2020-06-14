@@ -32,7 +32,7 @@ exports.createARoom = async (req, res, next) => {
     try{
         const data  = req.body;
         const newRoom = await RoomServices.createARoom(data);
-        return res.status(200).json(newRoom);
+        return res.status(201).json(newRoom);
     }catch(err){
         return res.status(500).json({ body: err.message });
     }
@@ -43,7 +43,7 @@ exports.updateARoom = async (req, res, next) => {
         const { id } = req.params;
         const data = req.body;
         const roomToUpdate = await RoomServices.updateARoom(id, data);
-        return res.status(200).json(roomToUpdate);
+        return res.status(201).json(roomToUpdate);
     }catch(err){
         return res.status(500).json({ body: err.message });
     }

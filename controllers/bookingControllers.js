@@ -1,5 +1,14 @@
 const BookingServices = require('../services/bookingServices');
 
+exports.getAdminNotification = async (req, res, next) => {
+    try{
+        const bookedRoom = await BookingServices.getAdminNotification();
+        return res.status(200).json(bookedRoom);
+    }catch(err){
+        return res.status(500).json({ body: err.message });
+    }
+};
+
 exports.getBookings = async (req, res, next) => {
     try{
         const bookings = await BookingServices.getBookings({});
@@ -13,7 +22,7 @@ exports.getABooking = async (req, res, next) => {
     try{
         const { id } = req.params;
         const booking = await BookingServices.getABooking(id);
-        return res.status(200).json(booking);
+        return res.status(201).json(booking);
     }catch(err){
         return res.status(500).json({ body: err.message });
     }
@@ -34,7 +43,7 @@ exports.updateBooking = async (req, res, next) => {
         const { id } = req.params;
         const data  = req.body;
         const updatedBooking = await BookingServices.updateBooking(id, data);
-        return res.status(200).json(updatedBooking);
+        return res.status(201).json(updatedBooking);
     }catch(err){
         return res.status(500).json({ body: err.message });
     }

@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const BookingControllers = require('../controllers/bookingControllers');
 
-router.get('/admin', BookingControllers.getBookings);
+router.get('/admin', BookingControllers.getAdminNotification);
 
 router.get('/fetchAllBookings', BookingControllers.getBookings);
 
