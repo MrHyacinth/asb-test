@@ -1,18 +1,24 @@
+require('dotenv').config();
 const http = require('http');
 const mongoose = require('mongoose');
-// const events = require('events');
 const port = process.env.PORT || 3030;
 const app = require('./index.js');
-// const socketHandler = require('./globals.js');
+const BookingServices = require('./services/bookingServices');
 
 app.set('port', port);
 
 const server = http.createServer(app);
 const io = require('socket.io')(server);
-// global.io = io;
 
+const { NODE_ENV, PROD_MONGO_URL, DEV_MONGO_URL } = process.env;
 
-let MONGO_URL = 'mongodb://localhost:27017/';
+let MONGO_URL;
+
+if (NODE_ENV == "production"){
+  MONGO_URL = PROD_MONGO_URL;
+}else{
+  MONGO_URL = DEV_MONGO_URL;
+}
 
 mongoose.connect(MONGO_URL, { useUnifiedTopology: true, useNewUrlParser: true });
 
@@ -29,7 +35,8 @@ io.on("connection", socket => {
   socket.on("disconect", () => console.log("client disconnected"));
 });
 
-// socketHandler.configure(server);
+io.sockets.on('connection', BookingServices.createBooking);
+io.sockets.on('connection', BookingServices.getAdminNotification);
 
 server.listen(port, (err, response) => {
   if (err) {
@@ -38,4 +45,3 @@ server.listen(port, (err, response) => {
     console.log(`Asb test server is listening at: ${port}`);
   }
 });
-

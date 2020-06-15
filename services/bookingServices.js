@@ -1,16 +1,11 @@
 const Bookings = require('../schemas/bookingModel');
 const Rooms = require('../schemas/roomModel');
-// const io = require('../server.js').io;
-// console.log("io is", global.io);
-// const socket = global.io.connect("http://127.0.0.1:3030");
-// const socketHandler = require('../globals.js');
-// const { io } = socketHandler;
 
-exports.getAdminNotification = async () => {
+exports.getAdminNotification = async (io) => {
     try{
         let bookedRoom;
         let data;
-        global.io.sockets.on('sendNotif', data => {
+        io.sockets.on('sendNotif', data => {
             console.log('connect established');
             console.log("data is", data);;
             data = data;
@@ -42,13 +37,12 @@ exports.getABooking = async id => {
     }
 };
 
-exports.createBooking = async data => {
+exports.createBooking = async (io, data) => {
     try{
         const newBooking = new Bookings(data);
         const result = await newBooking.save();
-        
-    //    global.io.emit('newData', result);
-        
+
+        io.emit('newData', result);
         return result;
     }catch(err){
         return err.message;
