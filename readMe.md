@@ -8,7 +8,7 @@ Program comprises of
 - Mongoose schema for creating bookings
 - Endpoints for all CRUD functions for the Rooms Collection
 - Endpoints for all CRUD functions for the Bookings Collection
-- Admin API for viewing booked rooms in real-time
+- Admin endpoint for viewing booked rooms in real-time
 
 ## To run ##
 
