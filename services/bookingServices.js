@@ -4,7 +4,6 @@ const Rooms = require('../schemas/roomModel');
 exports.getAdminNotification = async roomId => { 
     try{
     const bookedRoom = await Rooms.findOne({ _id: roomId });
-        console.log(bookedRoom);
         return bookedRoom;
     }catch(err){
         return err.message

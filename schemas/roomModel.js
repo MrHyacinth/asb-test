@@ -68,7 +68,7 @@ const insertRoomsHandler = (data) => {
     let res = [];
 
     Room.countDocuments({}, (err, count) => {
-        if (err) console.log(err.message);
+        if (err) return err.message;
         if(count === 0){
             data.forEach((item) => {
                 let newDoc = new Room(item);

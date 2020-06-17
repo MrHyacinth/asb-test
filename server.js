@@ -28,7 +28,6 @@ db.on('error', () => console.log('error connecting to database'));
 db.once('open', () => console.log('connection established'));
 
 io.on("connection", socket => {
-  console.log("client conneected"),
     socket.on("newData", data => {
       io.emit("sendNotif", data);
     });
@@ -38,9 +37,9 @@ io.on("connection", socket => {
 io.sockets.on('connection', BookingControllers.getAdminNotification);
 io.sockets.on('connection', BookingControllers.createBooking);
 
-server.listen(port, (err, response) => {
+server.listen(port, (err) => {
   if (err) {
-    console.log(err);
+    return err.message;
   } else {
     console.log(`Asb test server is listening at: ${port}`);
   }
