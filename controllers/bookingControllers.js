@@ -2,7 +2,8 @@ const BookingServices = require('../services/bookingServices');
 
 exports.getAdminNotification = async (req, res, next) => {
     try{
-        const bookedRoom = await BookingServices.getAdminNotification();
+        let data;
+        const bookedRoom = await BookingServices.getAdminNotification(data._id);
         return res.status(200).json(bookedRoom);
     }catch(err){
         return res.status(500).json({ body: err.message });
@@ -32,6 +33,7 @@ exports.createBooking = async (req, res, next) => {
     try{
         const data = req.body;
         const newBooking = await BookingServices.createBooking(data);
+        // io.emit("newData", newBooking);
         return res.status(200).json(newBooking);
     }catch(err){
         return res.status(500).json({ body: err.message });

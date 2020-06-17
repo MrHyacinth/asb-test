@@ -27,48 +27,43 @@ const Room = new model("Room", RoomSchema);
 
 const dbRooms = [
     {
-        "roomType": "mixed dorm room",
-        "spec": "male & female",
-        "numberOfBeds": 4,
-        "price": 2000,
-        "status": "available",
-        "__v": 0
+        roomType: "mixed dorm room",
+        spec: "male & female",
+        numberOfBeds: 4,
+        price: 2000,
+        status: "available",
     },
     {
-        "roomType": "dorm room",
-        "spec": "female only",
-        "numberOfBeds": 4,
-        "price": 2500,
-        "status": "available",
-        "__v": 0
+        roomType: "dorm room",
+        spec: "female only",
+        numberOfBeds: 4,
+        price: 2500,
+        status: "available",
     },
     {
-        "roomType": "mixed dorm room",
-        "spec": "male & female",
-        "numberOfBeds": 8,
-        "price": 1500,
-        "status": "available",
-        "__v": 0
+        roomType: "mixed dorm room",
+        spec: "male & female",
+        numberOfBeds: 8,
+        price: 1500,
+        status: "available",
     },
     {
-        "roomType": "deluxe room",
-        "spec": "open use",
-        "numberOfBeds": 1,
-        "price": 3000,
-        "status": "available",
-        "__v": 0
+        roomType: "deluxe room",
+        spec: "open use",
+        numberOfBeds: 1,
+        price: 3000,
+        status: "available",
     },
     {
-        "roomType": "standard double room",
-        "spec": "open use",
-        "numberOfBeds": 2,
-        "price": 2700,
-        "status": "available",
-        "__v": 0
+        roomType: "standard double room",
+        spec: "open use",
+        numberOfBeds: 2,
+        price: 2700,
+        status: "available",
     }
 ];
 
-const insertHandler = (data) => {
+const insertRoomsHandler = (data) => {
 
     let res = [];
 
@@ -86,6 +81,6 @@ const insertHandler = (data) => {
     return res;
 };
 
-insertHandler(dbRooms)
+insertRoomsHandler(dbRooms)
 
 module.exports = Room;

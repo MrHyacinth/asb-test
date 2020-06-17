@@ -1,22 +1,14 @@
 const Bookings = require('../schemas/bookingModel');
 const Rooms = require('../schemas/roomModel');
 
-exports.getAdminNotification = async (io) => {
+exports.getAdminNotification = async roomId => { 
     try{
-        let bookedRoom;
-        let data;
-        io.sockets.on('sendNotif', data => {
-            console.log('connect established');
-            console.log("data is", data);;
-            data = data;
-        });
-        console.log('data update', data);
-        bookedRoom = Rooms.findOne({ _id: data._id });
+    const bookedRoom = await Rooms.findOne({ _id: roomId });
         console.log(bookedRoom);
         return bookedRoom;
     }catch(err){
         return err.message
-    }
+    } 
 };
 
 exports.getBookings = async () => {
@@ -37,12 +29,11 @@ exports.getABooking = async id => {
     }
 };
 
-exports.createBooking = async (io, data) => {
+exports.createBooking = async (data) => { 
     try{
         const newBooking = new Bookings(data);
         const result = await newBooking.save();
-
-        io.emit('newData', result);
+    
         return result;
     }catch(err){
         return err.message;

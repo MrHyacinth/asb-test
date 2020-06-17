@@ -3,7 +3,7 @@ const http = require('http');
 const mongoose = require('mongoose');
 const port = process.env.PORT || 3030;
 const app = require('./index.js');
-const BookingServices = require('./services/bookingServices');
+const BookingControllers = require('./controllers/bookingControllers');
 
 app.set('port', port);
 
@@ -35,8 +35,8 @@ io.on("connection", socket => {
   socket.on("disconect", () => console.log("client disconnected"));
 });
 
-io.sockets.on('connection', BookingServices.createBooking);
-io.sockets.on('connection', BookingServices.getAdminNotification);
+io.sockets.on('connection', BookingControllers.getAdminNotification);
+io.sockets.on('connection', BookingControllers.createBooking);
 
 server.listen(port, (err, response) => {
   if (err) {
