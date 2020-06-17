@@ -1,5 +1,4 @@
 ## Asb.ng Test ##
-*https://github.com/MrHyacinth/asb-test*
 
 REST API built with Express.js on Node(server) and data storage with MongoDb. 
 
